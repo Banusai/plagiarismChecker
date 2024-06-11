@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_video.css') }}">
+    <title>Video Plagiarism Checker</title>
+    
+</head>
+<body>
+    <header>
+        <h1>Video Plagiarism Checker</h1>
+    </header>
+    
+    <section class="content">
+        <div id="result">
+            <!-- Result will be displayed here -->
+        </div>
+
+        <div id="videoContainer">
+            <input type="file" accept="video/*" id="videoInput" onchange="handleFileSelect()">
+            <video id="uploadedVideo" controls width="640" height="360"></video>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Video Plagiarism Checker. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function handleFileSelect() {
+            const fileInput = document.getElementById('videoInput');
+            const videoElement = document.getElementById('uploadedVideo');
+            const resultDiv = document.getElementById('result');
+
+            // Clear previous results
+            resultDiv.innerHTML = '';
+
+            // Check if a file is selected
+            if (fileInput.files.length > 0) {
+                const selectedFile = fileInput.files[0];
+
+                // Set the video source
+                videoElement.src = URL.createObjectURL(selectedFile);
+
+                // Display file information
+                const fileInfo = `<p>Selected Video: ${selectedFile.name}</p>`;
+                resultDiv.innerHTML = fileInfo;
+            } else {
+                // No file selected, clear video source
+                videoElement.src = '';
+            }
+        }
+    </script>
+</body>
+</html>
